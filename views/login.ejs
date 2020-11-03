@@ -1,0 +1,48 @@
+<%- include('header'); -%>
+<form>
+    <h2>log in</h2>
+    <label for="email">Email</label>
+    <input type="text" name="email" required/>
+    <div class="email error"></div>
+    <label for="pass">Password</label>
+    <input type="password" name="pass" required/>
+    <div class="pass error"></div>
+    <button>log in</button>
+</form>
+<script>
+    //get the form elements
+    const form=document.querySelector('form');
+    const emailErr=document.querySelector('.email.error');
+  const passErr=document.querySelector('.pass.error')
+  //lunch an event upon loging in
+    form.addEventListener('submit', async (e)=>{
+        //reset the fields upon page refresh
+        e.preventDefault();
+        emailErr.textContent="";
+        passErr.textContent="";
+        //get the field values
+        const email=form.email.value;
+        const password=form.pass.value;
+        try {
+            //the login demarch
+            const res=await fetch('/login',{
+                method:'POST',
+                body:JSON.stringify({email,password}),
+                headers:{'Content-Type':'application/json'}
+            });
+            const data=await res.json();
+            console.log(data);
+            if(data.errors){
+                emailErr.textContent=data.errors.email;
+                passErr.textContent=data.errors.pass;
+            }
+            if(data.user){
+                location.assign('/');
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    });
+</script>
+<%- include('footer'); -%>
