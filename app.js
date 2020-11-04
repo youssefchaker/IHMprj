@@ -3,14 +3,16 @@ const app = express();
 
 // middleware
 app.use(express.static('public'));
-app.use(express.json());
-app.use(express.static('views'));
-app.use(express.json());
 // view engine
 app.set('view engine', 'ejs');
 
 // routes
 app.get('/', (req, res) => res.render('home'));
+app.get('/login.ejs', (req, res) => res.render('login'));
+app.get('/signup.ejs', (req, res) => res.render('signup'));
+app.get('/smoothies.ejs', (req, res) => res.render('smoothies'));
+app.get('/pass.ejs', (req, res) => res.render('pass'));
+app.get('/thank.ejs', (req, res) => res.render('thank'));
 app.listen(3000);
 console.log('we are listening to port 3000');
 

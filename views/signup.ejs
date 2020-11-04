@@ -1,12 +1,30 @@
 <%- include ('header.ejs') -%>
 <form>
-    <h2>sign up</h2>
+    <h2>Sign Up</h2>
     <label for="email">Email</label>
-    <input type="text" name="email" required/>
-    <div class="email error"></div>
+    <input type="text" name="email" id="em" required/>
+    <div id="errem"></div>
     <label for="pass">Password</label>
-    <input type="password" name="pass" required/>
-    <div class="pass error"></div>
-    <button type="submit">Sign Up</button>
+    <input type="password" id="pass" name="pass" required/>
+    <div id="errpass" style="color: red;"></div>
+    <button type="submit" onclick="check()">Sign Up</button>
 </form>
+<script>
+    const pat="^(?=.*[a-z])(?=.*[A-Z])"
+    var errpass=document.getElementById("errpass");
+    var errem=document.getElementById("errem");
+    var em=document.getElementById("em");
+    var pass=document.getElementById("pass");
+    function check(){
+        if(pass.length<6){
+            errpass.innerHTML="the password must be at least 6 charcters long!"
+        }
+        else if(!pass.matches(pat)){
+            errpass.innerHTML="The password must contain at least an uppercase and a lower case character";
+        }
+        else{
+            errpass.innerHTML="";
+        }
+    }
+</script>
 <%- include('footer.ejs'); -%>
