@@ -3,13 +3,12 @@
     <h2>Password Restoration</h2>
     <h4>Fill in your Email to restore your Password</h4>
     <label for="email">Email</label>
-    <input type="text" name="email" required/>
-    <button type="button" onclick="direct()">Send Restoration Mail</button>
+    <input type="email" name="email" required/>
+    <button onclick="direct()">Send Rectification mail</button>
 </form>
-
 <script>
     function direct(){
-        window.location.href = "/thank";
+        window.location.href = "/thank.ejs";
     }
 </script>
 <%- include('footer.ejs'); -%>

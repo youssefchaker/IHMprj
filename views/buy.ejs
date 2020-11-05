@@ -1,0 +1,41 @@
+<%- include ('header.ejs') -%>
+<form>
+    <h3>Please Fill in the information for the purchase</h3>
+    <h2 id="it"></h2>
+    <img  src=""/>
+    <label for="name">FullName</label>
+    <input type="text" name="fname" required/>
+    <label for="birth">Date of birth</label>
+    <input type="date" name="birth" id="dte" max="" required/>
+    <hr>
+    <h5>*Paiment is processed through PayPal</h5>
+    <label for="crd">Credit Card Information</label>
+    <div name="crd">
+        <label for="ppalacc">PayPal Account Mail</label>
+        <input name="ppalacc" type="email" required/>
+        <label for="country">Country</label>
+        <select name="country">
+            <option>Tunisia</option>
+            <option>America</option>
+            <option>China</option>
+            <option>Iran</option>
+        </select>
+        <label for="currency">Currency</label>
+        <select name="currency">
+            <option>Dinar</option>
+            <option>Dollar</option>
+            <option>Yen</option>
+            <option>Lira</option>
+        </select>
+        <label for="ppalacc">PayPal Account Mail</label>
+        <input name="ppalacc" type="email"/>
+    </div>
+    <button>log in</button>
+</form>
+<script>
+    var today=parseInt(new Date().getMonth() + 1 ) + "-" + new Date().getDate()+ "-"+ new Date().getFullYear();
+    var dte =document.getElementById('dte');
+    dte.max = new Date().toISOString().split("T")[0];
+    var itname=document.getElementById("it");
+</script>
+<%- include('footer.ejs'); -%>

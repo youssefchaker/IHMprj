@@ -1,11 +1,10 @@
 <%- include ('header.ejs') -%>
-
+<h2 id="whiten">Click on the desired Picture to buy the desired Item</h2>
 <ul class="recipes">
   <li class="recipe">
-    <img src="/nes.jpg">
-    <h4>NES Console (25$)</h4>
+    <a href="buy.ejs" onclick="nes()"><img src="/nes.jpg"></a>
+    <h4 id="nes">NES Console (25$)</h4>
     <p>Nintendo Entertinement System -1983</p>
-    <a><input type="button"></input></a>
   </li>
   <li class="recipe">
     <img src="/Gb.jpg">
@@ -48,5 +47,12 @@
     <p>Wii -2006</p>
   </li>
 </ul>
+<script>
+      function nes(){
+        var item =document.getElementById("nes");
+        
 
+      }
+      
+</script>
 <%- include('footer.ejs'); -%>
