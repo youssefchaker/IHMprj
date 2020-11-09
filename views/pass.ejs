@@ -3,12 +3,29 @@
     <h2>Password Restoration</h2>
     <h4>Fill in your Email to restore your Password</h4>
     <label for="email">Email</label>
-    <input type="email" name="email" required/>
+    <input type="email" name="email" id="em" required/>
+    <div style="color: red;" id="res"></div>
     <button onclick="direct()">Send Rectification mail</button>
 </form>
 <script>
     function direct(){
-        window.location.href = "/thank.ejs";
-    }
+        var mailformat = "/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/";
+        em=document.getElementById("em");
+        res=document.getElementById("res");
+        if(em.vlaue!="" && em.value.match(mailformat)){
+            alert("e");
+            window.location.href = "/thank.ejs";
+        }
+            else{
+                res.innerHTML="Please put in a valid email adresse to continue the restoration process";
+            em.vlaue="";
+            setTimeout(function(){ res.innerHTML="";}, 2000);
+            document.addEventListener('invalid', (function () {
+  return function (e) {
+    e.preventDefault();
+    em.focus();
+  };
+})(),true);
+    }   }   
 </script>
 <%- include('footer.ejs'); -%>

@@ -1,41 +1,87 @@
 <%- include ('header.ejs') -%>
 <form>
     <h3>Please Fill in the information for the purchase</h3>
-    <h2 id="it"></h2>
-    <img  src=""/>
+    <h3 id="extra" style="text-transform: uppercase;font-size: xx-large;">sus</h3>
+    <img id="extraimg" src="" class="buyimg"/>
     <label for="name">FullName</label>
     <input type="text" name="fname" required/>
     <label for="birth">Date of birth</label>
     <input type="date" name="birth" id="dte" max="" required/>
     <hr>
     <h5>*Paiment is processed through PayPal</h5>
-    <label for="crd">Credit Card Information</label>
     <div name="crd">
-        <label for="ppalacc">PayPal Account Mail</label>
+        <label for="ppalacc" class="formbold">PayPal Account Mail</label>
         <input name="ppalacc" type="email" required/>
-        <label for="country">Country</label>
+        <label for="country" class="formbold">Country</label>
         <select name="country">
-            <option>Tunisia</option>
             <option>America</option>
+            <option>Tunisia</option>
             <option>China</option>
             <option>Iran</option>
         </select>
-        <label for="currency">Currency</label>
-        <select name="currency">
-            <option>Dinar</option>
-            <option>Dollar</option>
-            <option>Yen</option>
-            <option>Lira</option>
+        <label for="currency" class="formbold">Currency</label>
+        <select name="currency" id="curr" >
+            <option value="Dollar">Dollar</option>
+            <option value="Dinar">Dinar</option>
+            <option value="Yen">Yen</option>
+            <option value="Lira">Lira</option>
         </select>
-        <label for="ppalacc">PayPal Account Mail</label>
-        <input name="ppalacc" type="email"/>
+        <label for="Stock" class="formbold" class="formhold">Number of consoles to buy</label>
+        <input type="number" id="stock" name="stock" required value="1" min="1" onchange="incpr()" />
     </div>
-    <button>log in</button>
+    <button>Check out</button>
 </form>
 <script>
     var today=parseInt(new Date().getMonth() + 1 ) + "-" + new Date().getDate()+ "-"+ new Date().getFullYear();
     var dte =document.getElementById('dte');
     dte.max = new Date().toISOString().split("T")[0];
-    var itname=document.getElementById("it");
+    var extratxt=document.getElementById("extra");
+    var extraimg=document.getElementById("extraimg");
+    var currurl=window.location.href;
+    var dummy1 = currurl.split('item=')[1];
+    var img = currurl.split('img=')[1];
+    var item = dummy1.split('&')[0];
+    extratxt.innerHTML=item;
+    extraimg.src=img;
+
+    function incpr(){
+        extratxt.innerHTML=item;
+        var console=extratxt.innerHTML.split("(")[0];
+        var dummy=extratxt.innerHTML.split("(")[1];
+        var price=dummy.split("$")[0];
+        var multi=document.getElementById("stock").value;
+        var result=price*multi;
+        extratxt.innerHTML=console+"("+result+"$"+")";
+        var curr = document.getElementById("curr").value;
+    var reset=extratxt.innerHTML.split(")")[0]+")";
+    extratxt.innerHTML=reset;
+    var price=extratxt.innerHTML.split("(")[1].split("$")[0];
+    if(curr=="Dinar"){
+        extratxt.innerHTML+="--"+2.70*price+"DT";
+    }
+    else if(curr=="Lira"){
+        extratxt.innerHTML+="--"+8.52*price+"₺";
+    }
+    else if(curr=="Yen"){
+        extratxt.innerHTML+="--"+103.35*price+"¥";
+    }
+    }
+
+    document.getElementById("curr").onchange = function symb(){
+    var curr = document.getElementById("curr").value;
+    var reset=extratxt.innerHTML.split(")")[0]+")";
+    extratxt.innerHTML=reset;
+    var price=extratxt.innerHTML.split("(")[1].split("$")[0];
+    if(curr=="Dinar"){
+        extratxt.innerHTML+="--"+2.70*price+"DT";
+    }
+    else if(curr=="Lira"){
+        extratxt.innerHTML+="--"+8.52*price+"₺";
+    }
+    else if(curr=="Yen"){
+        extratxt.innerHTML+="--"+103.35*price+"¥";
+    }
+ };
+    
 </script>
 <%- include('footer.ejs'); -%>

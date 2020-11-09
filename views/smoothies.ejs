@@ -1,58 +1,84 @@
 <%- include ('header.ejs') -%>
-<h2 id="whiten">Click on the desired Picture to buy the desired Item</h2>
+<h2 id="whiten">Console Store</h2>
 <ul class="recipes">
   <li class="recipe">
-    <a href="buy.ejs" onclick="nes()"><img src="/nes.jpg"></a>
-    <h4 id="nes">NES Console (25$)</h4>
+    <a><img src="/nes.jpg"></a>
+    <h4>NES Console (25$)</h4>
     <p>Nintendo Entertinement System -1983</p>
+    <button onclick="nes()">Add To Cart</button>
   </li>
   <li class="recipe">
-    <img src="/Gb.jpg">
-    <h4>Gb Handheld (20$)</h4>
+    <a><img src="/Gb.jpg"></a>
+    <h4 id="gb">Gb Handheld (20$)</h4>
     <p>Game Boy -1989</p>
+    <button onclick="gb()" style="position: absolute; top: 190px;">Add To Cart</button>
   </li>
   <li class="recipe">
-    <img src="/snes.jpg">
+    <a onclick="snes()"><img src="/snes.jpg"></a>
     <h4>SNES Console (35$)</h4>
     <p>Super Nintendo Entertinement System -1990</p>
+    <button onclick="gb()">Add To Cart</button>
   </li>
   <li class="recipe">
-    <img src="/n64.jpg">
+    <a><img src="/n64.jpg"></a>
     <h4>N64 Console (40$)</h4>
     <p>Nintendo 64 -1996</p>
+    <button onclick="n64()">Add To Cart</button>
   </li>
     <li class="recipe">
-    <img src="/Gbc.jpg">
+    <a><img src="/Gbc.jpg"></a>
     <h4>Gbc Handheld (25$)</h4>
     <p>Game Boy -1998</p>
+    <button onclick="gbc()">Add To Cart</button>
   </li>
   <li class="recipe">
-    <img src="/gba.jpg">
+    <a><img src="/gba.jpg"></a>
     <h4>GBA Handheld Console (30$)</h4>
     <p>Game Boy Advance -2001</p>
+    <button onclick="gba()">Add To Cart</button>
   </li>
   <li class="recipe">
-    <img src="/gc.jpg">
+    <a><img src="/gc.jpg"></a>
     <h4>GC Console (35$)</h4>
     <p>Game Cube Console -2002</p>
+    <button onclick="gc()">Add To Cart</button>
   </li>
   <li class="recipe">
-    <img src="/ds.jpg">
+    <a><img src="/ds.jpg"></a>
     <h4>NDS Handheld Console (40$)</h4>
     <p>Nintendo DS -2004</p>
+    <button onclick="ds()">Add To Cart</button>
   </li>
   <li class="recipe">
-    <img src="/wii.jpg">
+    <a><img src="/wii.jpg"></a>
     <h4>Wii Console (50$)</h4>
     <p>Wii -2006</p>
+    <button onclick="wii()">Add To Cart</button>
   </li>
 </ul>
 <script>
       function nes(){
-        var item =document.getElementById("nes");
-        
-
+        document.location = "buy.ejs?item=Nes(25$)&img=/nes.jpg";
       }
-      
+      function gb(){
+        document.location = "buy.ejs?item=gb(20$)&img=/gb.jpg";
+      }
+      function snes(){
+        document.location = "buy.ejs?item=snes(35$)&img=/snes.jpg";
+      }
+      function n64(){
+        document.location = "buy.ejs?item=n64(40$)&img=/n64.jpg";
+      }
+      function gbc(){
+        document.location = "buy.ejs?item=gbc(25$)&img=/gbc.jpg";
+      } function gba(){
+        document.location = "buy.ejs?item=gba(20$)&img=/gba.jpg";
+      } function gc(){
+        document.location = "buy.ejs?item=gbc(35$)&img=/gc.jpg";
+      } function ds(){
+        document.location = "buy.ejs?item=ds(40$)&img=/ds.jpg";
+      } function wii(){
+        document.location = "buy.ejs?item=wii(50$)&img=/wii.jpg";
+      }
 </script>
 <%- include('footer.ejs'); -%>

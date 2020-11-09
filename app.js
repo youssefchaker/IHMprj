@@ -14,6 +14,7 @@ app.get('/smoothies.ejs', (req, res) => res.render('smoothies'));
 app.get('/pass.ejs', (req, res) => res.render('pass'));
 app.get('/thank.ejs', (req, res) => res.render('thank'));
 app.get('/buy.ejs', (req, res) => res.render('buy'));
+app.get('/contact.ejs', (req, res) => res.render('buy'));
 app.listen(3000);
 console.log('we are listening to port 3000');
 
