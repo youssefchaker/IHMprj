@@ -5,15 +5,14 @@
     <label for="email">Email</label>
     <input type="email" name="email" id="em" required/>
     <div style="color: red;" id="res"></div>
-    <button onclick="direct()">Send Rectification mail</button>
+    <button type="button" onclick="direct()">Send Rectification mail</button>
 </form>
 <script>
     function direct(){
-        var mailformat = "/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/";
+        var mailformat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         em=document.getElementById("em");
         res=document.getElementById("res");
-        if(em.vlaue!="" && em.value.match(mailformat)){
-            alert("e");
+        if(em.value!="" && mailformat.test(em.value)==true){
             window.location.href = "/thank.ejs";
         }
             else{

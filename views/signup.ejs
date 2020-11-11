@@ -2,29 +2,34 @@
 <form>
     <h2>Sign Up</h2>
     <label for="email">Email</label>
-    <input type="text" name="email" id="em" required/>
-    <div id="errem"></div>
+    <input type="text" name="email" id="em"/>
+    <div id="errem" style="color: red;"></div>
     <label for="pass">Password</label>
-    <input type="password" id="pass" name="pass" required/>
+    <input type="password" id="pass" name="pass"/>
     <div id="errpass" style="color: red;"></div>
-    <button type="submit" onclick="check()">Sign Up</button>
+    <h5>*Password must be 6 caracters long with at least one uppercase letter</h5>
+    <button type="button" onclick="check()">Sign Up</button>
 </form>
 <script>
-    const pat="^(?=.*[a-z])(?=.*[A-Z])"
-    var errpass=document.getElementById("errpass");
-    var errem=document.getElementById("errem");
-    var em=document.getElementById("em");
-    var pass=document.getElementById("pass");
     function check(){
-        /*if(pass.length<6){
-            errpass.innerHTML="the password must be at least 6 charcters long!"
-        }
-        else if(!pass.matches(pat)){
-            errpass.innerHTML="The password must contain at least an uppercase and a lower case character";
+        var mailformat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var passerr=document.getElementById("errpass");
+        var emerr=document.getElementById("errem");
+        var em=document.getElementById("em");
+        var pass=document.getElementById("pass");
+        if(em.value=="" || mailformat.test(em.value)==false){
+            emerr.innerHTML="please fill in a valid mail";
+            em.value=""
+            setTimeout(function(){ emerr.innerHTML="";}, 2000);
+            if(pass.value=="" || pass.value.search(/[A-Z]/) < 0 || pass.value.length<6){
+                passerr.innerHTML="please fill in your password";
+                pass.value="";
+                setTimeout(function(){ passerr.innerHTML="";}, 2000);
+            }
         }
         else{
-            errpass.innerHTML="";
-        }*/
+            window.location.href = "/thank.ejs";
+        }
     }
 </script>
 <%- include('footer.ejs'); -%>
