@@ -3,7 +3,7 @@
     <h2>Password Restoration</h2>
     <h4>Fill in your Email to restore your Password</h4>
     <label for="email">Email</label>
-    <input type="email" name="email" id="em" required/>
+    <input type="email" name="email" id="em" onclick="removerr()"/>
     <div style="color: red;" id="res"></div>
     <button type="button" onclick="direct()">Send Rectification mail</button>
 </form>
@@ -16,9 +16,8 @@
             window.location.href = "/thank.ejs";
         }
             else{
-                res.innerHTML="Please put in a valid email adresse to continue the restoration process";
-            em.vlaue="";
-            setTimeout(function(){ res.innerHTML="";}, 2000);
+                res.innerHTML="Please put in a valid email";
+            setTimeout(function(){ res.innerHTML="";}, 4000);
             document.addEventListener('invalid', (function () {
   return function (e) {
     e.preventDefault();
@@ -26,5 +25,8 @@
   };
 })(),true);
     }   }   
+    function removerr(){
+        document.getElementById("res").innerHTML="";
+    }
 </script>
 <%- include('footer.ejs'); -%>

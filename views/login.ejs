@@ -2,16 +2,18 @@
 <form>
     <h2>Log In</h2>
     <label for="email">Email</label>
-    <input type="text" name="email" id="em"/>
+    <input type="text" name="email" id="em" onclick="removerr()" />
     <div id="emerr" style="color: red;"></div>
     <label for="pass">Password</label>
-    <input type="password" name="pass" id="pass"/>
+    <input type="password" name="pass" id="pass" onclick="removerr()"/>
     <div id="passerr" style="color: red;"></div>
     <a href="pass.ejs" style="font-weight: bold ;text-decoration: underline;"><div>Forgot Password?</div></a>
-    <button type="button" onclick="check()" >log in</button>
+    <button class="btn" type="button" onclick="check()" >log in</button>
+    <button class="btn" type="button" onclick="goBack()">Go back to the main page</button>
 </form>
 <script>
     function check(){
+        var c=0;
         var mailformat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         em=document.getElementById("em");
         pass=document.getElementById("pass");
@@ -19,17 +21,24 @@
         passerr=document.getElementById("passerr");
         if(em.value=="" || mailformat.test(em.value)==false){
             emerr.innerHTML="please fill in a valid mail";
-            em.value=""
-            setTimeout(function(){ emerr.innerHTML="";}, 2000);
-            if(pass.value=="" || pass.value.search(/[A-Z]/) < 0 || pass.value.length<6){
-                passerr.innerHTML="please fill in your password";
-                pass.value="";
-                setTimeout(function(){ passerr.innerHTML="";}, 2000);
-            }
+            setTimeout(function(){ emerr.innerHTML="";}, 4000);
+            c++;
         }
-        else{
+        if(pass.value=="" || pass.value.search(/[A-Z]/) < 0 || pass.value.length<6){
+                passerr.innerHTML="please fill in your password";
+                setTimeout(function(){ passerr.innerHTML="";}, 4000);
+                c++;
+        }
+        if(c==0){
             window.location.href = "/thank.ejs";
         }
     }
+    function removerr(){
+        document.getElementById("emerr").innerHTML="";
+        document.getElementById("passerr").innerHTML="";
+    }
+    function goBack() {
+    window.location.href = "/"
+}
 </script>
 <%- include('footer.ejs'); -%>

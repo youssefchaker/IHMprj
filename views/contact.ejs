@@ -1,13 +1,143 @@
 <%- include ('header.ejs') -%>
+<script>
+    var el = document.getElementById('txt');                   
+    el.addEventListener('keyup', countCharacters, false);
+</script>
 <form>
-    <h2>Log In</h2>
-    <label for="email">Email</label>
-    <input type="text" name="email" required/>
-    <div class="email error"></div>
-    <label for="pass">Password</label>
-    <input type="password" name="pass" required/>
-    <div class="pass error"></div>
-    <a href="pass.ejs"><div>Forgot Password?</div></a>
-    <button>log in</button>
+    <h2>Feedback</h2>
+    <label id="1" for="name">First Name</label>
+    <input id="fname" type="text" name="fname" onclick="removerr()"/>
+    <div id="fnameerr" style="color: red;"></div>
+    <label id="2" for="lname">Last Name</label>
+    <input id="lname" type="text" name="lname" onclick="removerr()"/>
+    <div id="lnameerr" style="color: red;"></div>
+    <label id="4" for="txt">Feedback</label>
+    <textarea id="txt" name="txt" rows="20" cols="80" maxlength="200"></textarea>
+    <div id="txterr" style="color: red;"></div>
+    <div id="charrem">*200 Character Limit</div>
+    <button class="btn" type="button" onclick="test()" id="myBtn">Send Feedback</button>
+    <button class="btn" type="button" onclick="goBack()">Go back to the main page</button>
 </form>
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+          <span class="close" id="cl">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p style="font-size: larger;font-weight: bolder;color: blue;">Is this information ok?</p>
+          <p id="p1" class="formbold"></p>
+          <p id="p2" class="formbold"></p>
+          <p id="p3" class="formbold"></p>
+          <button class="btn" type="button" onclick="go()">Ok</button>
+        <button class="btn" type="button" onclick="exitmodal()" >Cancel</button>
+        </div>
+      </div>
+  </div>
+    <script>
+        
+         var mailformat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var txtarea = document.getElementById('txt');    
+        var fname = document.getElementById('fname'); 
+        var lname = document.getElementById('lname');  
+        var fnameerr = document.getElementById('fnameerr'); 
+        var lnameerr= document.getElementById('lnameerr'); 
+        var txterr = document.getElementById('txterr');  
+        var l1=document.getElementById("1");
+        var l2=document.getElementById("2");
+        var l3=document.getElementById("3");
+        var l4=document.getElementById("4");
+        txtarea.addEventListener('keyup', countCharacters, false);                                               
+    function countCharacters(e) {                                    
+        var textEntered, countRemaining, counter;          
+        textEntered = txtarea.value;
+        counter = (200 - (textEntered.length));
+        countRemaining = document.getElementById('charrem'); 
+        countRemaining.textContent = counter;       
+    }
+    
+    function test(){
+        var c=0;
+        var test1=true;
+        var test2=true;
+        if(fname.value==""){
+            fnameerr.innerHTML="please fill in your first name";
+            setTimeout(function(){ fnameerr.innerHTML="";}, 4000);
+            l1.scrollIntoView(true);
+            test1=false;
+        }
+        else{
+            c++;
+        }
+        if(lname.value==""){
+            lnameerr.innerHTML="please fill in your last name";
+            setTimeout(function(){ lnameerr.innerHTML="";}, 4000);
+            test2=false;
+            if(test1==true){
+                l2.scrollIntoView(true);
+            }
+        }
+        else{
+            c++;
+        }
+        if(txtarea.value==""){
+            txterr.innerHTML="please fill in your feedback";
+            setTimeout(function(){ txterr.innerHTML="";}, 4000);
+            if(test1==true && test2==true){
+                l4.scrollIntoView(true);
+            }
+        }
+        else{
+            c++;
+        }
+        if(c==3){
+            var modal = document.getElementById("myModal");
+            var p1=document.getElementById("p1");
+            var p2=document.getElementById("p2");
+            var p3=document.getElementById("p3");
+            p1.innerHTML="First name : "+fname.value;
+            p2.innerHTML= "Last name : "+lname.value;
+            p3.innerHTML="Feedback : "+txtarea.value;
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+            /*if (confirm("Is this information ok?\n"+ "First name : "+fname.value+"\n"+ "Last name : "+lname.value+"\n"+ "Feedback : "+txtarea.value)) {
+                window.location.href = "/thank.ejs";
+        } */
+        }
+    }
+    function removerr(){
+        document.getElementById("fnameerr").innerHTML="";
+        document.getElementById("lnameerr").innerHTML="";
+        document.getElementById("txterr").innerHTML="";
+    }
+    function goBack() {
+    window.location.href = "/"
+}
+function go(){
+    window.location.href = "/thank.ejs";
+}
+function exitmodal(){
+    document.getElementById("cl").click();
+}
+    </script>
 <%- include('footer.ejs'); -%>
